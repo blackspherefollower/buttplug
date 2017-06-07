@@ -1,5 +1,0 @@
-# Message JSON Schema
-
-```json
-
-```

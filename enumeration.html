@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Architecture · GitBook</title>
+        <title>Enumeration Messages · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="architecture.html" />
+    <link rel="next" href="enumeration.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="identification.html" />
     
 
     </head>
@@ -868,7 +868,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Architecture</a>
+        <a href="." >Enumeration Messages</a>
     </h1>
 </div>
 
@@ -883,33 +883,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="architecture">Architecture</h1>
-<h2 id="implementation-types">Implementation Types</h2>
-<p>The Buttplug Standard can be implemented in different ways. This section covers the terms used throughout this document.</p>
-<h3 id="libraries">Libraries</h3>
-<p>Implementing the standard as a library for a certain programming language allows developers to either build servers on top of the library in that language, or to integrate the library into their applications that also use that language (or FFI/bindings to that language). For instance, the C# implementation of the Buttplug Standard can be used with a WebSocket implementation on top of it to be a server that other applications can talk to. It could also be compiled into a Unity game so that the communication exists only in the executable itself.</p>
-<h3 id="servers">Servers</h3>
-<p>As mentioned above, servers are a thin layer on top of a library that allow other applications to access hardware managed by the server. For instance, a Web Application may not have the capability to talk to hardware by itself, but can connect with a Buttplug Server implementation via HTTP, WebSockets, or other standardized protocols. Programs like Max/MSP and Pd could communicate with a Buttplug Server implementation via OSC.</p>
-<h3 id="applications-aka-clients">Applications (aka Clients)</h3>
-<p>Applications, or clients, refer to programs that in some way interact with a server to perform some sort of job for the user. A few ideas for applications:</p>
-<ul>
-<li>A movie player that sends synchronization commands while playing an encoded video.</li>
-<li>A music player that syncs sex toys with the BPM of the current track.</li>
-<li>A video game that somehow involves sex toy interaction</li>
-</ul>
-<p>All of these would need to talk to a Buttplug server to establish which devices to use, then communicate with those devices.</p>
-<h2 id="protocol">Protocol</h2>
-<p>The Buttplug Standard defines a message based protocol between a client and a server. Note that the use of client and server here does not explicitly denote network connection. These terms are used as a generic way to denote different communication endpoints.</p>
-<p>Client are expected to request information from the server about devices that are connected, and to send information to those devices via the server. Servers will handle device enumeration, connection management, and failure recoveries (for instance, stopping all connected devices on client disconnect).</p>
-<p>While serialization formats are not yet standardized, current references implementations of the Standard use JSON for serialization. More information on this is available in the Messages section.</p>
-<h2 id="stages">Stages</h2>
-<p>Buttplug sessions consist of 3 stages. While these stages need not be discrete, due to the way Buttplug will likely be used, they will usually end up being so. Applications may hide or combine some of the stages depending on requirements.</p>
-<h3 id="identification">Identification</h3>
-<p>During the identification stage, a client will establish connection with the server, and send over its identifying information. The server may trigger some sort of UI event at this point to ask if the user will allow the client to connect and interact.</p>
-<h3 id="enumeration">Enumeration</h3>
-<p>After the client/server connection is set up, device enumeration can begin. The client can ask the server to scan for devices on various busses or media (serial, usb, bluetooth, network, etc), and return a list of devices it can communicate with.</p>
-<h3 id="consummation">Consummation</h3>
-<p>Once devices are found and selected, we can assume the user will begin interacting with connected devices. At this point, the client will mostly be sending and receiving device commands. It can usually (but not always) be assumed that continued enumeration may not be possible due to the context of situations that Buttplug software will be used in.</p>
+                                <h1 id="enumeration-messages">Enumeration Messages</h1>
+<h2 id="startscanning">StartScanning</h2>
+<h2 id="stopscanning">StopScanning</h2>
+<h2 id="scanningfinished">ScanningFinished</h2>
+<h2 id="requestdevicelist">RequestDeviceList</h2>
+<h2 id="devicelist">DeviceList</h2>
+<h2 id="deviceadded">DeviceAdded</h2>
+<h2 id="deviceremoved">DeviceRemoved</h2>
+<h2 id="stopdevice">StopDevice</h2>
+<h2 id="stopalldevices">StopAllDevices</h2>
 
                                 
                                 </section>
@@ -937,12 +920,12 @@
 
             
                 
-                <a href="./#why-is-it-called-buttplug" class="navigation navigation-prev " aria-label="Previous page: Why is it called Buttplug?">
+                <a href="identification.html#server-info" class="navigation navigation-prev " aria-label="Previous page: ServerInfo">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="architecture.html#implementation-types" class="navigation navigation-next " aria-label="Next page: Implementation Types">
+                <a href="enumeration.html#start-scanning" class="navigation navigation-next " aria-label="Next page: StartScanning">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -953,7 +936,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture","level":"1.2","depth":1,"next":{"title":"Implementation Types","level":"1.2.1","depth":2,"anchor":"#implementation-types","path":"architecture.md","ref":"architecture.md#implementation-types","articles":[{"title":"Libraries","level":"1.2.1.1","depth":3,"anchor":"#libraries","path":"architecture.md","ref":"architecture.md#libraries","articles":[]},{"title":"Servers","level":"1.2.1.2","depth":3,"anchor":"#servers","path":"architecture.md","ref":"architecture.md#servers","articles":[]},{"title":"Applications (aka Clients)","level":"1.2.1.3","depth":3,"anchor":"#applications-aka-clients","path":"architecture.md","ref":"architecture.md#applications-aka-clients","articles":[]}]},"previous":{"title":"Why is it called Buttplug?","level":"1.1.4","depth":2,"anchor":"#why-is-it-called-buttplug","path":"README.md","ref":"README.md#why-is-it-called-buttplug","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture.md","mtime":"2017-06-07T06:06:45.640Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-07T06:06:53.471Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Enumeration Messages","level":"2.4","depth":1,"next":{"title":"StartScanning","level":"2.4.1","depth":2,"anchor":"#start-scanning","path":"enumeration.md","ref":"enumeration.md#start-scanning","articles":[]},"previous":{"title":"ServerInfo","level":"2.3.2","depth":2,"anchor":"#server-info","path":"identification.md","ref":"identification.md#server-info","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"enumeration.md","mtime":"2017-06-07T06:06:47.580Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-07T06:06:53.471Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

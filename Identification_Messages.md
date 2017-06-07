@@ -1,7 +1,0 @@
-# Identification Messages
-
-
-## RequestServerInfo
-
-
-## ServerInfo
