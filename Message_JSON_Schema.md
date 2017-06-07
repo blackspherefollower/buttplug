@@ -1,0 +1,5 @@
+# Message JSON Schema
+
+```json
+
+```
