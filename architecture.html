@@ -176,64 +176,6 @@
     
         <li class="chapter " data-level="1.2.1" data-path="architecture.html">
             
-                <a href="architecture.html#implementation-types">
-            
-                    
-                    Implementation Types
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="architecture.html">
-            
-                <a href="architecture.html#libraries">
-            
-                    
-                    Libraries
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="architecture.html">
-            
-                <a href="architecture.html#servers">
-            
-                    
-                    Servers
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="architecture.html">
-            
-                <a href="architecture.html#applications-aka-clients">
-            
-                    
-                    Applications (aka Clients)
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="architecture.html">
-            
                 <a href="architecture.html#protocol">
             
                     
@@ -245,7 +187,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="architecture.html">
+        <li class="chapter " data-level="1.2.2" data-path="architecture.html">
             
                 <a href="architecture.html#stages">
             
@@ -259,7 +201,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.3.1" data-path="architecture.html">
+        <li class="chapter " data-level="1.2.2.1" data-path="architecture.html">
             
                 <a href="architecture.html#identification">
             
@@ -272,7 +214,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3.2" data-path="architecture.html">
+        <li class="chapter " data-level="1.2.2.2" data-path="architecture.html">
             
                 <a href="architecture.html#enumeration">
             
@@ -285,7 +227,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3.3" data-path="architecture.html">
+        <li class="chapter " data-level="1.2.2.3" data-path="architecture.html">
             
                 <a href="architecture.html#consummation">
             
@@ -300,51 +242,6 @@
     
 
             </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="usages.html">
-            
-                <a href="usages.html#usage-examples">
-            
-                    
-                    Usage Examples
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="usages.html">
-            
-                <a href="usages.html#library-embedded-in-a-video-game">
-            
-                    
-                    Library Embedded in a Video Game
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="usages.html">
-            
-                <a href="usages.html#web-based-hardware-synced-movie-player">
-            
-                    
-                    Web Based Hardware Synced Movie Player
-            
-                </a>
-            
-
             
         </li>
     
@@ -444,9 +341,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="status.html">
+        <li class="chapter " data-level="2.2" data-path="build/status.md">
             
-                <a href="status.html#status-messages">
+                <span>
             
                     
                     Status Messages
@@ -458,9 +355,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.1" data-path="status.html">
+        <li class="chapter " data-level="2.2.1" data-path="build/status.md">
             
-                <a href="status.html#ok">
+                <span>
             
                     
                     Ok
@@ -471,9 +368,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.2" data-path="status.html">
+        <li class="chapter " data-level="2.2.2" data-path="build/status.md">
             
-                <a href="status.html#error">
+                <span>
             
                     
                     Error
@@ -484,9 +381,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.3" data-path="status.html">
+        <li class="chapter " data-level="2.2.3" data-path="build/status.md">
             
-                <a href="status.html#ping">
+                <span>
             
                     
                     Ping
@@ -497,9 +394,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.4" data-path="status.html">
+        <li class="chapter " data-level="2.2.4" data-path="build/status.md">
             
-                <a href="status.html#request-log">
+                <span>
             
                     
                     RequestLog
@@ -510,9 +407,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.5" data-path="status.html">
+        <li class="chapter " data-level="2.2.5" data-path="build/status.md">
             
-                <a href="status.html#log">
+                <span>
             
                     
                     Log
@@ -878,23 +775,9 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="architecture">Architecture</h1>
-<h2 id="implementation-types">Implementation Types</h2>
-<p>The Buttplug Standard can be implemented in different ways. This section covers the terms used throughout this document.</p>
-<h3 id="libraries">Libraries</h3>
-<p>Implementing the standard as a library for a certain programming language allows developers to either build servers on top of the library in that language, or to integrate the library into their applications that also use that language (or FFI/bindings to that language). For instance, the C# implementation of the Buttplug Standard can be used with a WebSocket implementation on top of it to be a server that other applications can talk to. It could also be compiled into a Unity game so that the communication exists only in the executable itself.</p>
-<h3 id="servers">Servers</h3>
-<p>As mentioned above, servers are a thin layer on top of a library that allow other applications to access hardware managed by the server. For instance, a Web Application may not have the capability to talk to hardware by itself, but can connect with a Buttplug Server implementation via HTTP, WebSockets, or other standardized protocols. Programs like Max/MSP and Pd could communicate with a Buttplug Server implementation via OSC.</p>
-<h3 id="applications-aka-clients">Applications (aka Clients)</h3>
-<p>Applications, or clients, refer to programs that in some way interact with a server to perform some sort of job for the user. A few ideas for applications:</p>
-<ul>
-<li>A movie player that sends synchronization commands while playing an encoded video.</li>
-<li>A music player that syncs sex toys with the BPM of the current track.</li>
-<li>A video game that somehow involves sex toy interaction</li>
-</ul>
-<p>All of these would need to talk to a Buttplug server to establish which devices to use, then communicate with those devices.</p>
 <h2 id="protocol">Protocol</h2>
 <p>The Buttplug Standard defines a message based protocol between a client and a server. Note that the use of client and server here does not explicitly denote network connection. These terms are used as a generic way to denote different communication endpoints.</p>
-<p>Client are expected to request information from the server about devices that are connected, and to send information to those devices via the server. Servers will handle device enumeration, connection management, and failure recoveries (for instance, stopping all connected devices on client disconnect).</p>
+<p>Client are expected to request information from the server about devices that are connected, and to send information to those devices via the server. Servers will handle device enumeration, connection management to hardware, and failure recoveries (for instance, stopping all connected devices on client disconnect).</p>
 <p>While serialization formats are not yet standardized, current references implementations of the Standard use JSON for serialization. More information on this is available in the Messages section.</p>
 <h2 id="stages">Stages</h2>
 <p>Buttplug sessions consist of 3 stages. While these stages need not be discrete, due to the way Buttplug will likely be used, they will usually end up being so. Applications may hide or combine some of the stages depending on requirements.</p>
@@ -936,7 +819,7 @@
                 </a>
                 
                 
-                <a href="architecture.html#implementation-types" class="navigation navigation-next " aria-label="Next page: Implementation Types">
+                <a href="architecture.html#protocol" class="navigation navigation-next " aria-label="Next page: Protocol">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -947,7 +830,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture","level":"1.2","depth":1,"next":{"title":"Implementation Types","level":"1.2.1","depth":2,"anchor":"#implementation-types","path":"architecture.md","ref":"architecture.md#implementation-types","articles":[{"title":"Libraries","level":"1.2.1.1","depth":3,"anchor":"#libraries","path":"architecture.md","ref":"architecture.md#libraries","articles":[]},{"title":"Servers","level":"1.2.1.2","depth":3,"anchor":"#servers","path":"architecture.md","ref":"architecture.md#servers","articles":[]},{"title":"Applications (aka Clients)","level":"1.2.1.3","depth":3,"anchor":"#applications-aka-clients","path":"architecture.md","ref":"architecture.md#applications-aka-clients","articles":[]}]},"previous":{"title":"Why is it called Buttplug?","level":"1.1.4","depth":2,"anchor":"#why-is-it-called-buttplug","path":"README.md","ref":"README.md#why-is-it-called-buttplug","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture.md","mtime":"2017-06-08T05:42:37.598Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T05:43:12.593Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Architecture","level":"1.2","depth":1,"next":{"title":"Protocol","level":"1.2.1","depth":2,"anchor":"#protocol","path":"architecture.md","ref":"architecture.md#protocol","articles":[]},"previous":{"title":"Why is it called Buttplug?","level":"1.1.4","depth":2,"anchor":"#why-is-it-called-buttplug","path":"README.md","ref":"README.md#why-is-it-called-buttplug","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture.md","mtime":"2017-06-08T07:22:46.620Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T07:23:34.186Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
