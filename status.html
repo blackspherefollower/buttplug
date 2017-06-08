@@ -895,11 +895,13 @@
 <p><strong>Flow Diagram:</strong></p>
 <p><img src="ok_diagram.svg" alt="img"></p>
 <p><strong>Serialization Example:</strong></p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;Ok&quot;</span>: {
-    <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;Ok&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>
+    }
   }
-}
+]
 </code></pre>
 <h2 id="error">Error</h2>
 <p><strong>Description:</strong> Signifies that the previous message sent by the client caused some sort of parsing or processing error on the server.</p>
@@ -914,12 +916,14 @@
 <p><img src="error_diagram.svg" alt="img"></p>
 <p><img src="error_malformed_diagram.svg" alt="img"></p>
 <p><strong>Serialization Example:</strong></p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;Error&quot;</span>: {
-    <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-string">&quot;ErrorMessage&quot;</span>: <span class="hljs-string">&quot;Server received invalid JSON.&quot;</span>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;Error&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;ErrorMessage&quot;</span>: <span class="hljs-string">&quot;Server received invalid JSON.&quot;</span>
+    }
   }
-}
+]
 </code></pre>
 <h2 id="ping">Ping</h2>
 <p><strong>Description:</strong> Ping acts a watchdog between the client and the server. The server will expect the client to send a ping message at a certain interval (interval will be sent to the client as part of the identification step). If the client fails to ping within the specified time, the server will disconnect and stop all currently connected devices.</p>
@@ -936,11 +940,13 @@
 <p><strong>Flow Diagram:</strong></p>
 <p><img src="ping_diagram.svg" alt="img"></p>
 <p><strong>Serialization Example:</strong></p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;Ping&quot;</span>: {
-    <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">5</span>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;Ping&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">5</span>
+    }
   }
-}
+]
 </code></pre>
 <h2 id="requestlog">RequestLog</h2>
 <p><strong>Description:</strong> Requests that the server send all internal log messages to the client. Useful for debugging.</p>
@@ -966,12 +972,14 @@
 <p><strong>Flow Diagram:</strong></p>
 <p><img src="requestlog_diagram.svg" alt="img"></p>
 <p><strong>Serialization Example:</strong></p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;RequestLog&quot;</span>: {
-    <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;LogLevel&quot;</span>: <span class="hljs-string">&quot;Warn&quot;</span>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;RequestLog&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;LogLevel&quot;</span>: <span class="hljs-string">&quot;Warn&quot;</span>
+    }
   }
-}
+]
 </code></pre>
 <h2 id="log">Log</h2>
 <p><strong>Description:</strong> Log message from the server. Only sent after the client has sent a RequestLog message with a level other than &quot;Off&quot;.</p>
@@ -995,12 +1003,15 @@
 <p><strong>Flow Diagram:</strong></p>
 <p><img src="log_diagram.svg" alt="img"></p>
 <p><strong>Serialization Example:</strong></p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;RequestLog&quot;</span>: {
-    <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-string">&quot;LogLevel&quot;</span>: <span class="hljs-string">&quot;Warn&quot;</span>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;Log&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;LogLevel&quot;</span>: <span class="hljs-string">&quot;Trace&quot;</span>,
+      <span class="hljs-string">&quot;LogMessage&quot;</span>: <span class="hljs-string">&quot;This is a Log Message.&quot;</span>
+    }
   }
-}
+]
 </code></pre>
 
                                 
@@ -1045,7 +1056,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Status Messages","level":"2.2","depth":1,"next":{"title":"Ok","level":"2.2.1","depth":2,"anchor":"#ok","path":"status.md","ref":"status.md#ok","articles":[]},"previous":{"title":"Message Description Template","level":"2.1.6","depth":2,"anchor":"#message-description-template","path":"messages.md","ref":"messages.md#message-description-template","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"status.md","mtime":"2017-06-07T06:06:47.524Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-07T06:06:53.471Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Status Messages","level":"2.2","depth":1,"next":{"title":"Ok","level":"2.2.1","depth":2,"anchor":"#ok","path":"status.md","ref":"status.md#ok","articles":[]},"previous":{"title":"Message Description Template","level":"2.1.6","depth":2,"anchor":"#message-description-template","path":"messages.md","ref":"messages.md#message-description-template","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"status.md","mtime":"2017-06-08T01:48:38.908Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T01:53:28.536Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -1053,10 +1064,6 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>

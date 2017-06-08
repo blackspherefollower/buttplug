@@ -885,7 +885,51 @@
                                 
                                 <h1 id="identification-messages">Identification Messages</h1>
 <h2 id="requestserverinfo">RequestServerInfo</h2>
+<p><strong>Description:</strong> Sent by the client to register itself with the server, and request info from the server.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>ClientName</em> (string): Name of the client, for the server to use for UI if needed. Cannot be null.</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<p>ServerInfo message on success, Error message on malformed message, null client name, or other error.</p>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="log_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;RequestServerInfo&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;ClientName&quot;</span>: <span class="hljs-string">&quot;Test Client&quot;</span>
+    }
+  }
+]
+</code></pre>
 <h2 id="serverinfo">ServerInfo</h2>
+<p><strong>Description:</strong> Send by server to client, contains information about the server name (optional), template version, and ping time expectations.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>ServerName</em> (string): Name of the server. Can be null (0-length).</li>
+<li><em>MessageVersion</em> (string): Semantic version for the message template the server uses.</li>
+<li><em>MaxPingTime</em> (unsigned int): Maximum internal for pings from the client, in milliseconds. If a client takes to longer than this time between sending Ping messages, the server is expected to disconnect.</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<p>None. Server-To-Client message only.</p>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="log_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;ServerInfo&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;ServerName&quot;</span>: <span class="hljs-string">&quot;Test Server&quot;</span>,
+      <span class="hljs-string">&quot;MessageVersion&quot;</span>: <span class="hljs-string">&quot;0.0.1&quot;</span>,
+      <span class="hljs-string">&quot;MaxPingTime&quot;</span>: <span class="hljs-number">100</span>
+    }
+  }
+]
+</code></pre>
 
                                 
                                 </section>
@@ -929,7 +973,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Identification Messages","level":"2.3","depth":1,"next":{"title":"RequestServerInfo","level":"2.3.1","depth":2,"anchor":"#request-server-info","path":"identification.md","ref":"identification.md#request-server-info","articles":[]},"previous":{"title":"Log","level":"2.2.5","depth":2,"anchor":"#log","path":"status.md","ref":"status.md#log","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"identification.md","mtime":"2017-06-07T06:06:47.552Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-07T06:06:53.471Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Identification Messages","level":"2.3","depth":1,"next":{"title":"RequestServerInfo","level":"2.3.1","depth":2,"anchor":"#request-server-info","path":"identification.md","ref":"identification.md#request-server-info","articles":[]},"previous":{"title":"Log","level":"2.2.5","depth":2,"anchor":"#log","path":"status.md","ref":"status.md#log","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"identification.md","mtime":"2017-06-08T01:48:39.896Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T01:53:28.536Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -937,10 +981,6 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
