@@ -882,8 +882,463 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="message-json-schema">Message JSON Schema</h1>
-<pre><code class="lang-json">
-
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;$schema&quot;</span>: <span class="hljs-string">&quot;http://json-schema.org/draft-06/schema#&quot;</span>,
+  <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Buttplug Message Schema&quot;</span>,
+  <span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-string">&quot;0.0.1&quot;</span>,
+  <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;The JSON Protocol format for the Buttplug Protocol.&quot;</span>,
+  <span class="hljs-string">&quot;components&quot;</span> : {
+    <span class="hljs-string">&quot;Id&quot;</span>: {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;User-set id for the message. 0 denotes system message and is reserved.&quot;</span>,
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+      <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">4294967295</span>
+    },
+    <span class="hljs-string">&quot;SystemId&quot;</span>: {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Used for non-direct-reply messages that can only be sent from server to client, using the reserved system message Id of 0.&quot;</span>,
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+      <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-string">&quot;DeviceName&quot;</span>: {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Name of the device&quot;</span>,
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+    },
+    <span class="hljs-string">&quot;DeviceIndex&quot;</span>: {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Index used for referencing the device in device messages.&quot;</span>,
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+      <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-string">&quot;IdMessage&quot;</span> : {
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>}
+      },
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;DeviceMessages&quot;</span> : {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;A list of the messages a device will accept on this server implementation.&quot;</span>,
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;array&quot;</span>,
+      <span class="hljs-string">&quot;items&quot;</span> : {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+        <span class="hljs-string">&quot;minItems&quot;</span>: <span class="hljs-number">1</span>
+      }
+    },
+    <span class="hljs-string">&quot;SystemIdMessage&quot;</span> : {
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Message sent by the server that is not in direct reply to a message send from the client, and always uses system Id.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/SystemId&quot;</span>}
+      },
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;DeviceIndexMessage&quot;</span> : {
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> }
+      },
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>
+      ]
+    }
+  },
+  <span class="hljs-string">&quot;messages&quot;</span>: {
+    <span class="hljs-string">&quot;Ok&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Signifies successful processing of the message indicated by the id.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;Ping&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Connection keep-alive message.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;Error&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Signifies the server encountered an error while processing the message indicated by the id.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;ErrorMessage&quot;</span>: {
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;ErrorMessage&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;Test&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Used for connection/application testing. Causes server to echo back the string sent. Sending string of &apos;Error&apos; will result in a server error. &quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;TestString&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;String to be echo&apos;d back from server. Setting this to &apos;Error&apos; will cause an error to be thrown.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;TestString&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;DeviceList&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;List of all available devices known to the system.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;Devices&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Array of device ids and names.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;array&quot;</span>,
+          <span class="hljs-string">&quot;items&quot;</span>: {
+            <span class="hljs-string">&quot;properties&quot;</span>: {
+              <span class="hljs-string">&quot;DeviceName&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceName&quot;</span> },
+              <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+              <span class="hljs-string">&quot;DeviceMessages&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceMessages&quot;</span> }
+            },
+            <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;required&quot;</span>: [
+              <span class="hljs-string">&quot;DeviceName&quot;</span>,
+              <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+              <span class="hljs-string">&quot;DeviceMessages&quot;</span>
+            ]
+          }
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;Devices&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;DeviceAdded&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Notifies client that a device of a certain type has been added to the server.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/SystemId&quot;</span>},
+        <span class="hljs-string">&quot;DeviceName&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceName&quot;</span> },
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;DeviceMessages&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceMessages&quot;</span> }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceName&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;DeviceMessages&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;DeviceRemoved&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Notifies client that a device of a certain type has been removed from the server.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndexMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;DeviceClaim&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sent by client to claim ownership of a device, so that other clients cannot send commands to it.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndexMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;DeviceRelease&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Send by client to release ownership of a device.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndexMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;RequestDeviceList&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request for the server to send a list of devices to the client.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;StartScanning&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request for the server to start scanning for new devices.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;StopScanning&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request for the server to stop scanning for new devices.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;ScanningFinished&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Server notification to client that scanning has ended.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/SystemIdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;RequestLog&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request for server to stream log messages of a certain level to client.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;LogLevel&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Maximum level of log message to receive.&quot;</span>,
+          <span class="hljs-string">&quot;enum&quot;</span>: [<span class="hljs-string">&quot;Off&quot;</span>, <span class="hljs-string">&quot;Fatal&quot;</span>, <span class="hljs-string">&quot;Error&quot;</span>, <span class="hljs-string">&quot;Warn&quot;</span>, <span class="hljs-string">&quot;Info&quot;</span>, <span class="hljs-string">&quot;Debug&quot;</span>, <span class="hljs-string">&quot;Trace&quot;</span>]
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;LogLevel&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;Log&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Log message from the server.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/SystemId&quot;</span>},
+        <span class="hljs-string">&quot;LogLevel&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Log level of message.&quot;</span>,
+          <span class="hljs-string">&quot;enum&quot;</span>: [<span class="hljs-string">&quot;Off&quot;</span>, <span class="hljs-string">&quot;Fatal&quot;</span>, <span class="hljs-string">&quot;Error&quot;</span>, <span class="hljs-string">&quot;Warn&quot;</span>, <span class="hljs-string">&quot;Info&quot;</span>, <span class="hljs-string">&quot;Debug&quot;</span>, <span class="hljs-string">&quot;Trace&quot;</span>]
+        },
+        <span class="hljs-string">&quot;LogMessage&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Log message from server.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;LogLevel&quot;</span>,
+        <span class="hljs-string">&quot;LogMessage&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;RequestServerInfo&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request server version.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    },
+    <span class="hljs-string">&quot;ServerInfo&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Server version information, in Major.Minor.Build format.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;MajorVersion&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Major version of server.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+        },
+        <span class="hljs-string">&quot;MinorVersion&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Minor version of server.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+        },
+        <span class="hljs-string">&quot;BuildVersion&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Build version of server.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;MajorVersion&quot;</span>,
+        <span class="hljs-string">&quot;MinorVersion&quot;</span>,
+        <span class="hljs-string">&quot;BuildVersion&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;FleshlightLaunchFW12Cmd&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sends speed and position command to the Fleshlight Launch Device denoted by the device index.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;Speed&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Speed at which to move to designated position.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">99</span>
+        },
+        <span class="hljs-string">&quot;Position&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Position to which to move Fleshlight.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">99</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;Speed&quot;</span>,
+        <span class="hljs-string">&quot;Position&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;LovenseCmd&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sends a command string to a Lovense device. Command string will be verified by sender.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;Command&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Command to send to Lovense device.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;Command&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;SingleMotorVibrateCmd&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sends a vibrate command to a device that supports vibration.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;Speed&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Device vibration speed (floating point, 0 &lt; x &lt; 1), stepping will be device specific.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;number&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">1</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;Command&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;RawCmd&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sends a raw byte array to a device. Should only be used for testing/development.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;Command&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Command to send to Lovense device.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;array&quot;</span>,
+          <span class="hljs-string">&quot;items&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+            <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-string">&quot;maximum&quot;</span>: <span class="hljs-number">255</span>,
+            <span class="hljs-string">&quot;minItems&quot;</span>: <span class="hljs-number">1</span>
+          }
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;Command&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;KiirooCmd&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Sends a raw byte string to a Kiiroo Onyx/Pearl device.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> },
+        <span class="hljs-string">&quot;Command&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Command to send to Lovense device.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>,
+        <span class="hljs-string">&quot;Command&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;StopDevice&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Stops the all actions currently being taken by a device.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/SystemId&quot;</span>},
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>:  { <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/DeviceIndex&quot;</span> }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;DeviceIndex&quot;</span>
+      ]
+    },
+    <span class="hljs-string">&quot;StopDevices&quot;</span>: {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Stops all actions currently being taken by all connected devices.&quot;</span>,
+      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+    }
+  },
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;array&quot;</span>,
+  <span class="hljs-string">&quot;items&quot;</span>: {
+    <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Messages&quot;</span>,
+    <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;One or more messages validated by the Buttplug Message schema list.&quot;</span>,
+    <span class="hljs-string">&quot;properties&quot;</span>: {
+      <span class="hljs-string">&quot;Ok&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Ok&quot;</span>},
+      <span class="hljs-string">&quot;Error&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Error&quot;</span>},
+      <span class="hljs-string">&quot;Ping&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Ping&quot;</span>},
+      <span class="hljs-string">&quot;Test&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Test&quot;</span>},
+      <span class="hljs-string">&quot;DeviceList&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceList&quot;</span>},
+      <span class="hljs-string">&quot;DeviceAdded&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceAdded&quot;</span>},
+      <span class="hljs-string">&quot;DeviceRemoved&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceRemoved&quot;</span>},
+      <span class="hljs-string">&quot;DeviceClaim&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceClaim&quot;</span>},
+      <span class="hljs-string">&quot;DeviceRelease&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceRelease&quot;</span>},
+      <span class="hljs-string">&quot;RequestDeviceList&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/RequestDeviceList&quot;</span>},
+      <span class="hljs-string">&quot;StopDevice&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StopDevice&quot;</span>},
+      <span class="hljs-string">&quot;StopDevices&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StopDevices&quot;</span>},
+      <span class="hljs-string">&quot;StartScanning&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StartScanning&quot;</span>},
+      <span class="hljs-string">&quot;StopScanning&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StopScanning&quot;</span>},
+      <span class="hljs-string">&quot;ScanningFinished&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/ScanningFinished&quot;</span>},
+      <span class="hljs-string">&quot;RequestLog&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/RequestLog&quot;</span>},
+      <span class="hljs-string">&quot;Log&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Log&quot;</span>},
+      <span class="hljs-string">&quot;RequestServerInfo&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/RequestServerInfo&quot;</span>},
+      <span class="hljs-string">&quot;ServerInfo&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/ServerInfo&quot;</span>},
+      <span class="hljs-string">&quot;FleshlightLaunchFW12Cmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/FleshlightLaunchFW12Cmd&quot;</span>},
+      <span class="hljs-string">&quot;LovenseCmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/LovenseCmd&quot;</span>},
+      <span class="hljs-string">&quot;SingleMotorVibrateCmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/SingleMotorVibrateCmd&quot;</span>},
+      <span class="hljs-string">&quot;KiirooCmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/KiirooCmd&quot;</span>},
+      <span class="hljs-string">&quot;RawCmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/RawCmd&quot;</span>}
+    },
+    <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">1</span>
+  },
+  <span class="hljs-string">&quot;minItems&quot;</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>
+}
 </code></pre>
 
                                 
@@ -924,7 +1379,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Message JSON Schema","level":"2.7","depth":1,"previous":{"title":"LovenseCmd","level":"2.6.3","depth":2,"anchor":"#lovense-cmd","path":"specific.md","ref":"specific.md#lovense-cmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"jsonschema.md","mtime":"2017-06-08T01:48:39.988Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T01:53:28.536Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Message JSON Schema","level":"2.7","depth":1,"previous":{"title":"LovenseCmd","level":"2.6.3","depth":2,"anchor":"#lovense-cmd","path":"specific.md","ref":"specific.md#lovense-cmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"jsonschema.md","mtime":"2017-06-08T03:11:16.640Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T03:11:23.931Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

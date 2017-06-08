@@ -884,6 +884,52 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="generic-device-messages">Generic Device Messages</h1>
+<h2 id="stopdevicecmd">StopDeviceCmd</h2>
+<p><strong>Description:</strong> Client request to have the server stop a device from whatever actions it may be taking. This message should be supported by all devices, and the server should know how to stop any device it supports.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>DeviceIndex</em> (unsigned int): Index of device to stop.</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<ul>
+<li>Ok message with matching Id on successful request.</li>
+<li>Error message on value or message error.</li>
+</ul>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="stopdevice_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;StopDeviceCmd&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;DeviceIndex&quot;</span>: <span class="hljs-number">0</span>
+    }
+  }
+]
+</code></pre>
+<h2 id="stopalldevices">StopAllDevices</h2>
+<p><strong>Description:</strong> Sent by the client to tell the server to stop all devices. Can be used for emergency situations, on client shutdown for cleanup, etc&#x2026; While this is considered a Device Message, since it pertains to all currently connected devices, it does not specify a device index (and does not end with &apos;Cmd&apos;).</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<ul>
+<li>Ok message with matching Id on successful request.</li>
+<li>Error message on value or message error.</li>
+</ul>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="stopalldevices_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;StopAllDevices&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>
+    }
+  }
+]
+</code></pre>
 <h2 id="singlemotorvibratecmd">SingleMotorVibrateCmd</h2>
 <h2 id="rawcmd">RawCmd</h2>
 
@@ -929,7 +975,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Generic Device Messages","level":"2.5","depth":1,"next":{"title":"SingleMotorVibrateCmd","level":"2.5.1","depth":2,"anchor":"#single-motor-vibrate-cmd","path":"generic.md","ref":"generic.md#single-motor-vibrate-cmd","articles":[]},"previous":{"title":"StopAllDevices","level":"2.4.9","depth":2,"anchor":"#stop-all-devices","path":"enumeration.md","ref":"enumeration.md#stop-all-devices","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"generic.md","mtime":"2017-06-08T01:48:39.944Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T01:53:28.536Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generic Device Messages","level":"2.5","depth":1,"next":{"title":"SingleMotorVibrateCmd","level":"2.5.1","depth":2,"anchor":"#single-motor-vibrate-cmd","path":"generic.md","ref":"generic.md#single-motor-vibrate-cmd","articles":[]},"previous":{"title":"StopAllDevices","level":"2.4.9","depth":2,"anchor":"#stop-all-devices","path":"enumeration.md","ref":"enumeration.md#stop-all-devices","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"generic.md","mtime":"2017-06-08T03:11:16.576Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T03:11:23.931Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
