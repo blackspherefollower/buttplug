@@ -439,19 +439,6 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.6" data-path="messages.html">
-            
-                <a href="messages.html#message-description-template">
-            
-                    
-                    Message Description Template
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -738,10 +725,10 @@
     
         <li class="chapter " data-level="2.5.3" data-path="generic.html">
             
-                <a href="generic.html#single-motor-vibrate-cmd">
+                <a href="generic.html#raw-cmd">
             
                     
-                    SingleMotorVibrateCmd
+                    RawCmd
             
                 </a>
             
@@ -751,10 +738,10 @@
     
         <li class="chapter " data-level="2.5.4" data-path="generic.html">
             
-                <a href="generic.html#raw-cmd">
+                <a href="generic.html#single-motor-vibrate-cmd">
             
                     
-                    RawCmd
+                    SingleMotorVibrateCmd
             
                 </a>
             
@@ -783,10 +770,10 @@
     
         <li class="chapter " data-level="2.6.1" data-path="specific.html">
             
-                <a href="specific.html#kiiro-cmd">
+                <a href="specific.html#kiiroo-cmd">
             
                     
-                    KiiroCmd
+                    KiirooCmd
             
                 </a>
             
@@ -891,9 +878,86 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="specific-device-messages">Specific Device Messages</h1>
-<h2 id="kiirocmd">KiiroCmd</h2>
+<h2 id="kiiroocmd">KiirooCmd</h2>
+<p><strong>Description:</strong> Causes a toy that supports Kiiroo style commands to run whatever event may be related. More information on Kiiroo commands can be found in STPIHKAL.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>DeviceIndex</em> (unsigned int): Index of device</li>
+<li><em>Command</em> (unsigned int): Unsigned integer in range [0-4].</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<ul>
+<li>Ok message with matching Id on successful request.</li>
+<li>Error message on value or message error.</li>
+</ul>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="kiiroocmd_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;KiirooCmd&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;DeviceIndex&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;Command&quot;</span>: <span class="hljs-number">4</span>
+    }
+  }
+]
+</code></pre>
 <h2 id="fleshlightlaunchfw12cmd">FleshlightLaunchFW12Cmd</h2>
+<p><strong>Description:</strong> Causes a toy that supports Fleshlight Launch (Firmware Version 1.2) style commands to run whatever event may be related. More information on Fleshlight Launch commands can be found in STPIHKAL.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>DeviceIndex</em> (unsigned int): Index of device</li>
+<li><em>Position</em> (unsigned int): Unsigned integer in range [0-99], denoting position to move to.</li>
+<li><em>Speed</em> (unsigned int): Unsigned integer in range [0-99], denoting speed to requested position at.</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<ul>
+<li>Ok message with matching Id on successful request.</li>
+<li>Error message on value or message error.</li>
+</ul>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="fleshlightlaunchfw12cmd_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;FleshlightLaunchFW12Cmd&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;DeviceIndex&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;Position&quot;</span>: <span class="hljs-number">95</span>,
+      <span class="hljs-string">&quot;Speed&quot;</span>: <span class="hljs-number">90</span>
+    }
+  }
+]
+</code></pre>
 <h2 id="lovensecmd">LovenseCmd</h2>
+<p><strong>Description:</strong> Causes a toy that supports Lovense style commands to run whatever event may be related. More information on Fleshlight Launch commands can be found in STPIHKAL.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><em>Id</em> (unsigned int): Message Id</li>
+<li><em>DeviceIndex</em> (unsigned int): Index of device</li>
+<li><em>Command</em> (string): String command for Lovense toys. Must be a valid Lovense command accessible on most of their toys. See STPIHKAL for more info. Library implementations should check this for validity.</li>
+</ul>
+<p><strong>Expected Response:</strong></p>
+<ul>
+<li>Ok message with matching Id on successful request.</li>
+<li>Error message on value or message error.</li>
+</ul>
+<p><strong>Flow Diagram:</strong></p>
+<p><img src="lovensecmd_diagram.svg" alt="img"></p>
+<p><strong>Serialization Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;LovenseCmd&quot;</span>: {
+      <span class="hljs-string">&quot;Id&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;DeviceIndex&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">&quot;Command&quot;</span>: <span class="hljs-string">&quot;Vibrate:20;&quot;</span>
+    }
+  }
+]
+</code></pre>
 
                                 
                                 </section>
@@ -921,12 +985,12 @@
 
             
                 
-                <a href="generic.html#raw-cmd" class="navigation navigation-prev " aria-label="Previous page: RawCmd">
+                <a href="generic.html#single-motor-vibrate-cmd" class="navigation navigation-prev " aria-label="Previous page: SingleMotorVibrateCmd">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="specific.html#kiiro-cmd" class="navigation navigation-next " aria-label="Next page: KiiroCmd">
+                <a href="specific.html#kiiroo-cmd" class="navigation navigation-next " aria-label="Next page: KiirooCmd">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -937,7 +1001,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Specific Device Messages","level":"2.6","depth":1,"next":{"title":"KiiroCmd","level":"2.6.1","depth":2,"anchor":"#kiiro-cmd","path":"specific.md","ref":"specific.md#kiiro-cmd","articles":[]},"previous":{"title":"RawCmd","level":"2.5.4","depth":2,"anchor":"#raw-cmd","path":"generic.md","ref":"generic.md#raw-cmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"specific.md","mtime":"2017-06-08T03:14:39.459Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T03:16:01.951Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Specific Device Messages","level":"2.6","depth":1,"next":{"title":"KiirooCmd","level":"2.6.1","depth":2,"anchor":"#kiiroo-cmd","path":"specific.md","ref":"specific.md#kiiroo-cmd","articles":[]},"previous":{"title":"SingleMotorVibrateCmd","level":"2.5.4","depth":2,"anchor":"#single-motor-vibrate-cmd","path":"generic.md","ref":"generic.md#single-motor-vibrate-cmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"specific.md","mtime":"2017-06-08T05:42:44.066Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-08T05:43:12.593Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
