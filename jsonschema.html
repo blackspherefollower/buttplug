@@ -1013,8 +1013,8 @@
           <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
         }
       },
-      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">3</span>,
       <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-string">&quot;required&quot;</span>: [
         <span class="hljs-string">&quot;Id&quot;</span>,
@@ -1024,14 +1024,36 @@
     },
     <span class="hljs-string">&quot;RequestServerInfo&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
-      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request server version.&quot;</span>,
-      <span class="hljs-string">&quot;anyOf&quot;</span> : [{ <span class="hljs-string">&quot;$ref&quot;</span> : <span class="hljs-string">&quot;#/components/IdMessage&quot;</span> }]
+      <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Request server version, and relay client name.&quot;</span>,
+      <span class="hljs-string">&quot;properties&quot;</span>: {
+        <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/SystemId&quot;</span>},
+        <span class="hljs-string">&quot;ClientName&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Name of the client software.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        }
+      },
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">&quot;required&quot;</span>: [
+        <span class="hljs-string">&quot;Id&quot;</span>,
+        <span class="hljs-string">&quot;ClientName&quot;</span>
+      ]
     },
     <span class="hljs-string">&quot;ServerInfo&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,
       <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Server version information, in Major.Minor.Build format.&quot;</span>,
       <span class="hljs-string">&quot;properties&quot;</span>: {
         <span class="hljs-string">&quot;Id&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/components/Id&quot;</span>},
+        <span class="hljs-string">&quot;ServerName&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Name of the server. Can be 0-length.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>
+        },
+        <span class="hljs-string">&quot;MessageVersion&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Message template version of the server software.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+        },
         <span class="hljs-string">&quot;MajorVersion&quot;</span>: {
           <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Major version of server.&quot;</span>,
           <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
@@ -1046,16 +1068,24 @@
           <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Build version of server.&quot;</span>,
           <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
           <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">0</span>
+        },
+        <span class="hljs-string">&quot;MaxPingTime&quot;</span>: {
+          <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Maximum time (in milliseconds) the server will wait between ping messages from client before shutting down.&quot;</span>,
+          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span>,
+          <span class="hljs-string">&quot;minimum&quot;</span>: <span class="hljs-number">1</span>
         }
       },
-      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">4</span>,
-      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;minProperties&quot;</span>: <span class="hljs-number">7</span>,
+      <span class="hljs-string">&quot;maxProperties&quot;</span>: <span class="hljs-number">7</span>,
       <span class="hljs-string">&quot;additionalProperties&quot;</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-string">&quot;required&quot;</span>: [
         <span class="hljs-string">&quot;Id&quot;</span>,
         <span class="hljs-string">&quot;MajorVersion&quot;</span>,
         <span class="hljs-string">&quot;MinorVersion&quot;</span>,
-        <span class="hljs-string">&quot;BuildVersion&quot;</span>
+        <span class="hljs-string">&quot;BuildVersion&quot;</span>,
+        <span class="hljs-string">&quot;MessageVersion&quot;</span>,
+        <span class="hljs-string">&quot;MaxPingTime&quot;</span>,
+        <span class="hljs-string">&quot;ServerName&quot;</span>
       ]
     },
     <span class="hljs-string">&quot;FleshlightLaunchFW12Cmd&quot;</span>: {
@@ -1207,7 +1237,6 @@
       <span class="hljs-string">&quot;Test&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/Test&quot;</span>},
       <span class="hljs-string">&quot;DeviceList&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceList&quot;</span>},
       <span class="hljs-string">&quot;DeviceAdded&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceAdded&quot;</span>},
-      <span class="hljs-string">&quot;DeviceRelease&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/DeviceRelease&quot;</span>},
       <span class="hljs-string">&quot;RequestDeviceList&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/RequestDeviceList&quot;</span>},
       <span class="hljs-string">&quot;StopDeviceCmd&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StopDeviceCmd&quot;</span>},
       <span class="hljs-string">&quot;StopAllDevices&quot;</span>: {<span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;#/messages/StopAllDevices&quot;</span>},
@@ -1271,7 +1300,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Message JSON Schema","level":"3.1","depth":1,"previous":{"title":"LovenseCmd","level":"2.6.3","depth":2,"anchor":"#lovensecmd","path":"specific.md","ref":"specific.md#lovensecmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"jsonschema.md","mtime":"2017-06-10T06:45:10.413Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-10T06:46:03.803Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Message JSON Schema","level":"3.1","depth":1,"previous":{"title":"LovenseCmd","level":"2.6.3","depth":2,"anchor":"#lovensecmd","path":"specific.md","ref":"specific.md#lovensecmd","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"jsonschema.md","mtime":"2017-06-10T07:42:09.122Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-10T07:42:50.768Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
