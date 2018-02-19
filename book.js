@@ -1,4 +1,4 @@
-module.exports = { "root": "./protocol-spec" };
+module.exports = { "root": "./protocol-spec", "plugins": [] };
 
 // Only add piwik if we're building on the CI and deploying
 if (process.env.CI) {
@@ -12,3 +12,5 @@ if (process.env.CI) {
     }
   };
 }
+
+module.exports["plugins"].push("mermaid-gb3");

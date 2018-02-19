@@ -18,10 +18,10 @@
   "homepage": "https://github.com/metafetish/buttplug#readme",
   "devDependencies": {
     "gitbook": "^3.2.3",
-    "gitbook-cli": "^2.3.2",
-    "yarn": "^1.6.0"
+    "gitbook-cli": "^2.3.2"
   },
   "dependencies": {
+    "gitbook-plugin-mermaid-gb3": "^2.1.0",
     "gitbook-plugin-piwik": "^0.2.1"
   }
 }
