@@ -6,9 +6,10 @@ install:
 - yarn
 - npm i -g travis-ci-cloudfront-invalidation
 script:
-- yarn build
+- npm run build
 cache:
-  - yarn
+- directories:
+  - "node_modules"
 deploy:
 - provider: pages
   local_dir: _book
